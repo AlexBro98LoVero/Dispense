@@ -18,6 +18,8 @@
  enhanced}{th}
 
 \begin{document}
+
+
 \section{Introduzione}
 
 In questo corso andremo a vedere le basi della \textbf{Crittrografia moderna}, in primis dobbiamo capire cosa vuol dire "\textit{Crittrografia}. Partiamo dall'etimologia: dal greco \textbf{\textit{kryptós}} (nascosto) - \textbf{\textit{graphía}} (scrittura). In sostanza, la Crittografia è quella disciplina che studia e analizza come inviare e ricevere messaggi \textbf{nascosti}, con il termine "nascosti" si intende che solo ed esclusivamente la sorgente e il destinatario possono leggere il contenuto del messaggio, mentre qualsiasi altra persona non può. 
@@ -87,7 +89,7 @@ Quindi per evitare confunsione correggiamo la definizione di prima dicendo che u
 
 In realtà vedremo verso metà corso che esiste anche una così detta \textbf{chiave pubblica}, ovverò una chiave come la abbiamo definita fino ad ora ma \textbf{chiunque la può sapere}. Se vi sembra strano e contro intuitivo quando lo vedremo sarà tutto chiaro.
 
-\subsubsection{Rotto} un sistema crittografico si definisce \textbf{Rotto} qualora si riesca a decifrare un messaggio criptato senza la chiave. Un sistema rotto chiaramente non si può usare perchè chiunque riuscirebbe a decriptare il messaggio. Un esempio di sitema rotto è il \textbf{DES} (che vedremo nel capito Cifrari a Blocchi). Il DES è stato inventato nel 1975 e all'inizio era molto usato, ma il problema è che usava una chiave a lunghezza fissa: 54 bit. Ad oggi purtroppo una chiave a 54 bit è soggetta ad attacchi \textbf{brute-force} \footnote{Attacchi in cui si provano tutte le possibili combinazioni di una chiave, chiaramente richiede molto tempo ma per chiavi molto piccole (come DES) può funzionare} e per questo oggi non si può più usare il DES per cifrare ed è stato stituito dall' \textbf{AES}.
+\subsubsection{Rotto} un sistema crittografico si definisce \textbf{Rotto} qualora si riesca a decifrare un messaggio criptato senza la chiave. Un sistema rotto chiaramente non si può usare perchè chiunque riuscirebbe a decriptare il messaggio. Un esempio di sitema rotto è il \textbf{DES} (che vedremo nel capito Cifrari a Blocchi). Il DES è stato inventato nel 1976 e all'inizio era molto usato, ma il problema è che usava una chiave a lunghezza fissa: 54 bit. Ad oggi purtroppo una chiave a 54 bit è soggetta ad attacchi \textbf{brute-force} \footnote{Attacchi in cui si provano tutte le possibili combinazioni di una chiave, chiaramente richiede molto tempo ma per chiavi molto piccole (come DES) può funzionare} e per questo oggi non si può più usare il DES per cifrare ed è stato stituito dall' \textbf{AES}.
 
 
 
@@ -158,20 +160,42 @@ Sistemi Asimmetrici:
 
 Queste intanto sono le prime differenze tra asimmetrici e simmetrici, e vediamo che sono complementari, infatti difficilmente nei progetti si usa solamente uno o l'altro, perchè è meglio usare entrambi. Per esempio, il protocollo \textbf{HTTPS}, che serve per inviare le pagine web in maniera crittata, crea una chiave per un sistema \textbf{simmetrico} ma la chiave viene crittata tramite un sistema \textbf{asimmetrico}, in questa maniera i due utenti avranno la chiave in \textbf{maniera sicura} (perchè è stata inviata tramite asimmetrico) ma nella comunicazione viene usata un sistema simmetrico perchè è più \textbf{veloce}.
 
-\subsubsection{Sistemi Simmetrici}
+\subsubsection{Sistemi Simmetrici - OTP}
 
 Tra le due categorie, i sistemi simmetrici sono i primi che vedremo perchè sono tendenzialmente più semplici. Come si vede dal grafico, i simmetrici si dividono in altre 3 categorie: \textbf{OTP}, \textbf{Stream} e \textbf{a Blocchi}. Il primo che vedremo è \textbf{OTP} (\textit{One Time Pad}) e sarà l'unico sistema che è definito \textbf{perfettamente Sicuro}, ovvero che partendo dal messaggio cifrato (senza la chiave) è impossibile ritornare al messaggio originario. Mentre tutti gli altri sistemi che vedremo con attacchi \textbf{brute-force} si può risalire al messaggio originale senza la chiave di cifratura. Chiaramente gli attacchi sono infattibili perchè richiederebbero anni per decifrare, ma nell'ipotesi di avere un computer infinitivamente potente, il cifrario OTP sarebbe l'unico \textbf{impossibile} da tornare al messaggio originario. 
 
 Dopo questa definizione potreste pensare che potremmo usare sempre e solo l'\textbf{OTP} ma purtroppo ha un pecca che lo rende inutilizzabile: che bisogna cambiare sempre chiave dopo ogni cifratura, perchè con l' OTP se due messaggi sono stati cifrati con la stessa chiave, tramite delle \textbf{criptoanalisi} si può risalire alla chiave e ai messaggi originali. E se qualcuno pensanse di generare sempre nuovi chiavi diventerebbe eccessivamente pesante e insostenibile per una comunicazione.
 
 
+\subsubsection{Sistemi Simmetrici - PRNG / Stream}
+
+La categoria successiva riguarda è quella degli \textbf{Stream}, che però vedremo pochissimo perchè non sono utilizzati. Semplicemente gli Stream funzionano generando un \textbf{flusso} (per questo motivo prende il nome di \textit{Stream}) di \textbf{Numeri Casuali}, e questi numeri casuali vengono usati per cifrare tramite \textbf{OTP} i messaggi. Il problema che la generazione di numeri casuali per i computer è \textbf{impossibile} infatti i computer sono sistermi \textbf{deterministici}. Infatti per generare dei numeri per questo sistema si usano algoritmi detti \textbf{PRNG} (\textit{Preudo Randomic Number Generator}) che provano a generare numeri che sembrano casuali ma che comunque hanno delle correlazioni tra di loro e questo con determinati attacchi si può trovare i numeri successivi allo stream anche senza chiave. Per questo motivo questa tipologia di cifrari oggi non sono per nulla usati.
+
+\newpage
+\subsubsection{Sistemi Simmetrici - A Blocchi}
+
+Finalmente arriviamo ai veri sistemi simmetrici: Quelli a blocchi. Questi cifrari sono quelli che vengono usati oggigiorno per la loro sicurezza e \textbf{velocità}. Ad ogni modo i cifrari a blocchi si basano rompendo il messaggio in blocchi a n bit. Supponiamo di voler criptare il messaggio a 120 bit e noi abbiamo un cifrario a blocchi che prende blocchi da 50 bit. Allora vuol dire che il nostro messaggio \textbf{sarà diviso in 3 blocchi: } primo da 50 bit, secodno da 50 bit e l'ultimo da 20 bit, poi l'ultimo se non è grande quanto il blocco del cifrario vengono aggiunti degli zeri (o un qualsiasi \textbf{padding}) in modo che raggiunga la lunghezza di 50 bit.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{logos/cripto6.pdf}
+\end{figure}
 
 
 
+Questo meccanismo di creare dei blocchi serve perchè poi i blocchi vengono trasformati in \textbf{matrici} ed è per questo che serve che abbaiano una grandezza definita, perchè gli altoritmi in sè sfruttano operazioni su matrici per criptare il messaggio, e alla stessa maniera il messaggio cifrato sarà anch'esso una matrice grande uguale che viene riportato a messaggio. è importante capire che visto che l'algoritmo prende un blocco alla volta e lo cripta e chiaramente allo stesso blocco equivale lo stesso blocco cifrato, quindi vuole dire che se due blocchi all'interno del messaggio sono uguali avranno lo stesso blocco cifrato. 
 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{logos/cripto7.pdf}
+\end{figure}
 
+E poi i blocchi cifrati vengono riuniti per formare il messaggio cifrato. Per evitare che due blocchi uguali forniscano lo stesso output (perchè potrebbe aiutare per capire il messaggio originale) si sono inventati i \textbf{Modi di Funzionamento dei cifrari a blocchi}, che vedremo con calma cosa vogliono dire.
 
+La forza di questi cifrari è che usano soltanto operazioni \textbf{booleane} (\textbf{and},\textbf{or}, \textbf{xor} e \textbf{not}) e operazioni \textbf{tra matrici}, il chè le rende molto veloci visto che queste operazioni  sotto ottimizzate nei computer odierni
+
+I principali algoritmi a blocchi sono \textbf{DES} (\textit{Data Encryption Standard}) e \textbf{AES} (\textit{Advanced Encryption Standard}). Il nacque nel 1976 e per i successivi ventanni fu lo standard per i cifrari a blocchi, nel 1999 però dei ricercatori riuscino a \textbf{rompere} il cifrario rendendolo insicuro per via della poca lunghezza della chiave, che permetteva un attacco brute-force. Al suo posto arrivo \textbf{AES} nel 1998 che ad oggi è ancora un sistema sicuro. In più riuscirono a "sistemare" il DES inventando il \textbf{3DES} (\textit{Triple DES}) che non è altro che un messaggio cifrato 3 volte con il DES, e ad oggi questo scamotaggio permette al DES di essere usato ancora (ovviamente oggi si usa solo i 3DES e non più il DES singolo).
 
 
 \end{document}
