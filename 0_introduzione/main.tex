@@ -2,11 +2,20 @@
 
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amsmath,amssymb}
+\usepackage[ruled,vlined]{algorithm2e}
+
+
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems, skins}  
 
 
 \definecolor{maincolor}{HTML}{1E90FF}
+
+
+\SetKwSty{textcolor{maincolor}}
+\SetArgSty{textcolor{maincolor}}
+\SetCommentSty{textcolor{maincolor}}
+
 
 \newtcbtheorem{teorema}{Teorema}%
 {colback=maincolor!10!white,
@@ -22,26 +31,30 @@
 
 \section{Introduzione}
 
-In questo corso andremo a vedere le basi della \textbf{Crittrografia moderna}, in primis dobbiamo capire cosa vuol dire "\textit{Crittrografia}. Partiamo dall'etimologia: dal greco \textbf{\textit{kryptós}} (nascosto) - \textbf{\textit{graphía}} (scrittura). In sostanza, la Crittografia è quella disciplina che studia e analizza come inviare e ricevere messaggi \textbf{nascosti}, con il termine "nascosti" si intende che solo ed esclusivamente la sorgente e il destinatario possono leggere il contenuto del messaggio, mentre qualsiasi altra persona non può. 
+In questo corso andremo a vedere le basi della \textbf{Crittografia moderna}. In primis, dobbiamo capire cosa vuol dire “\textit{Crittografia}”. Partiamo dall’etimologia: dal greco \textbf{\textit{kryptós}} (nascosto) – \textbf{\textit{graphía}} (scrittura). In sostanza, la Crittografia è la disciplina che studia e analizza come inviare e ricevere messaggi \textbf{nascosti}. Con il termine “nascosti” si intende che solo ed esclusivamente la sorgente e il destinatario possono leggere il contenuto del messaggio, mentre qualsiasi altra persona non può.
 
 \begin{figure}[h]
      \centering
     \includegraphics[width=0.6\linewidth]{logos/cripto1.pdf}
 \end{figure}
 
-In questa immagine l'utente A manda un messaggio criptato all'utente B, in questa maniera solo A e B potranno leggere il contenuto del messaggio, mentre l'intercettatore anche se riesce ad avere una copia del messaggio non riuscirà a leggerlo l'interno del messaggio (dato che è criptato).
+In questa immagine l'utente A manda un messaggio criptato all’utente B; in questo modo solo A e B potranno leggere il contenuto del messaggio, mentre l’intercettatore, anche se riuscisse ad averne una copia, non sarebbe in grado di leggerlo (dato che è criptato).
 
-% Le premesse che ha la criptografia sembrano molto semplici ma con calma capiremo che dietro a questa piccolissima premessa si nasconde un mondo tutto da scoprire. 
+La crittografia la usiamo tutti i giorni (anche involontariamente) con i nostri dispositivi elettronici. Un esempio è \textbf{WhatsApp}, che tramite una crittografia \textbf{End-to-End} (che avremo tempo di approfondire) permette di inviare messaggi in maniera sicura, in modo che nessun altro (nemmeno WhatsApp stesso!) possa leggere il messaggio che hai mandato al tuo amico. Ha anche utilità nell’autenticazione digitale e nei documenti elettronici: infatti, tutti i sistemi come \textbf{SPID} oppure \textbf{CIE} sfruttano la crittografia per funzionare. La crittografia viene utilizzata anche dalle case produttrici di console (come \textbf{Sony} per la \textbf{PlayStation}) per impedire di crackare le loro console. Di esempi ce ne sono a centinaia e avremo tempo per scoprirli tutti.
 
-La Crittografia la usiamo tutti i giorni (anche involontariamente) con i nostri dispositivi elettronici. Un esempio è \textbf{Whatsapp}, che tramite una crittografia \textbf{End-To-End} (che avremo tempo di approfondire) permette di inviare messaggi in maniera sicura, in modo che nessun'altro (nemmeno Whatsapp stesso!) possa leggere il messaggio che hai mandato al tuo amico. Ha anche utilità nell'autenticazione digitale e documenti elettronici, infatti tutti i sistemi come \textbf{SPID} oppure \textbf{CIE} sfruttano la crittografia per funzionare. La crittografia viene utilizzata anche dalle case produttrici di conssole (come \textbf{Sony} per la \textbf{Playstation}) per impedire di crackare le loro console. Di ese,pi ce ne sono a centina e avremo tempo per scoprirli tutti. 
 
-Anche se ho elencato tutti esempi \textbf{digitali}, la crittografia è una disciplina che si basa sulla \textbf{matematica}, infatti tutti i sistemai crittografici struttano prove matematiche (come \textbf{Logaritmo Disceto} e \textbf{Fattorizzazione di numeri composti }) per funzionare. Infatti mi piace definire la crittografia come una branca che sta a metà strada tra matematica e l'informatica, perchè usa nozioni matematiche ma le applica in contesti informatici.
+Anche se ho elencato molti esempi \textbf{digitali}, la crittografia è una disciplina basata sulla \textbf{matematica}. Infatti, tutti i sistemi crittografici si fondano su prove matematiche (come il \textbf{Logaritmo Discreto} e la \textbf{Fattorizzazione di numeri composti}) per funzionare. Mi piace definire la crittografia come una branca a metà strada tra matematica e informatica, poiché utilizza concetti matematici applicati a contesti informatici.
 
-Un altro punto fondamentele da chiarire è che nonostanre parleremo di sistemi moderni come \textbf{AES}, \textbf{RSA}, \textbf{DIffie-Helmann} e \textbf{ECC} che sono stati inventati tra il 1960 e 1990 circa, in realtà la crittografia è molto più vecchia, infatti già dal'\textbf{Impero Romano} (753 A.C. - 476 D.C.) se ne parlava, chiaramente era molto più semplice dei sistemi odierni ma all'ora serviva per mandare messaggi all'esercito. In questo coro di cifrari "antichi" ne vedremo due, forse i più impattanti nella storia: \textbf{Cifrario di Cesare} che possiamo definire come il primo sistema crittografico, e la macchina \textbf{Enigma} che durante la Seconda Guerra Mondiale fu di fondamentele importanza per le truppe dell'Asse, ma gli alleati grazie a \textbf{Alan Turin} riuscirono a rompere la macchina aiutanto gli alleati a vincere la guerra. 
+\newpage
 
-Fatte tutte le premesse del caso iniziamo a parlare di crittografia, e come prima cosa capiamo tutti i termini che si usano in questo ambito.
+Un altro punto fondamentale da chiarire è che, anche se parleremo di sistemi moderni come \textbf{AES}, \textbf{RSA}, \textbf{Diffie-Hellman} e \textbf{ECC}, inventati tra il 1960 e il 1990 circa, in realtà la crittografia è molto più antica. Già dall’\textbf{Impero Romano} (753 a.C. – 476 d.C.) se ne parlava: chiaramente i sistemi erano molto più semplici di quelli odierni, ma all’epoca servivano per inviare messaggi all’esercito. In questo coro di cifrari "antichi" ne vedremo due, forse i più impattanti nella storia: il \textbf{Cifrario di Cesare}, che possiamo definire il primo sistema crittografico, e la macchina \textbf{Enigma}, che durante la Seconda Guerra Mondiale fu di fondamentale importanza per le truppe dell’Asse; gli alleati, grazie a \textbf{Alan Turing}, riuscirono a decifrarla, aiutando così la loro vittoria.
 
-\subsubsection{Cifratura} La cifratura di un messaggio è il processo che permette di \textbf{alterare} un messaggio che si vuole mandare in maniera che nessun'altro (apparte chi manda il messaggio e il destinatario) possa leggerne il messaggio originario. La cifratura deve avvenire tramite un \textbf{algoritmo di cifratura} e tramite l'ausilio di una (o più) \textbf{chiave}.
+Fatte tutte le premesse del caso, iniziamo a parlare di crittografia; come prima cosa, vediamo e definiamo tutti i termini utilizzati in questo ambito.
+
+
+\subsubsection{Cifratura} 
+
+La cifratura di un messaggio è il processo che permette di \textbf{alterare} un messaggio in modo che nessun altro (eccetto chi lo invia e il destinatario) possa leggere il contenuto originario. La cifratura deve avvenire tramite un \textbf{algoritmo di cifratura} e con l’ausilio di una (o più) \textbf{chiavi}.
 
 
 \begin{figure}[h]
@@ -49,11 +62,12 @@ Fatte tutte le premesse del caso iniziamo a parlare di crittografia, e come prim
     \includegraphics[width=0.8\linewidth]{logos/cripto2.pdf}
 \end{figure}
 
+In questo caso, il messaggio "\textbf{Ciao sono Alex}" tramite una cifratura è diventato \textbf{-QnbB\^{}DUxQxUP\^{}}; se qualcuno riuscisse a intercettare il messaggio cifrato, non capirebbe nulla.
 
-In questo caso il messaggio "\textbf{Ciao sono Alex} tramite una cifratura è diventato \textbf{-QnbB\^{}DUxQxUP\^{}}, se qualcuno riuscisse a intercettare il messaggio cifrato non capirebbe nulla.
 
+\subsubsection{Decifratura} 
 
-\subsubsection{Decifratura} La decifratura è il passaggio \textbf{inverso} della cifratura, nel senso che permette di tornare al messaggio originale avendo il messaggio cifrato. Chiaramente bisogna usare lo \textbf{stesso algoritmo di cifratura} e sopratutto la \textbf{stessa chiave}, che ricordiamo deve conoscerla solo chi manda il messaggio e chi lo deve ricevere.
+La decifratura è il passaggio \textbf{inverso} della cifratura, nel senso che permette di tornare al messaggio originale partendo dal messaggio cifrato. Chiaramente, bisogna usare lo \textbf{stesso algoritmo di cifratura} e, soprattutto, la \textbf{stessa chiave}, che deve essere conosciuta solo da chi invia il messaggio e da chi lo deve ricevere.
 
 
 \begin{figure}[h]
@@ -62,75 +76,90 @@ In questo caso il messaggio "\textbf{Ciao sono Alex} tramite una cifratura è di
 \end{figure}
 
 
-Inizziamo ad usare del nozionismo matematico, il meccanisco di cifratura e decifratura le possiamo paragonare ad una \textbf{funzione} perchè entrambe prendono una variabile in input e restituiscono un valore in output. Quindi possiamo definire la cifratura come 
+Iniziamo a utilizzare un po' di nozionismo matematico: il meccanismo di cifratura e decifratura può essere paragonato a una \textbf{funzione}, poiché entrambe prendono una variabile in input e restituiscono un valore in output. Possiamo quindi definire la cifratura come
+
 
 \begin{equation*}
     c = f(m)
 \end{equation*}
 
-Dove $c$ è il messaggio cifrato, $m$ è il messaggio originale e $f$ è la "funzione cifratura". Dato questo allora la "funzione decifratura" sarà definita come
+Dove $c$ è il messaggio cifrato, $m$ è il messaggio originale e $f$ è la “funzione di cifratura”. Dato ciò, la “funzione di decifratura” sarà definita come
+
 
 \begin{equation*}
     m = f^{-1}(c)
 \end{equation*}
 
-Questo si può dedurre dalla seguente equazione
+Questo può essere dedotto dalla seguente equazione:
+
 
 \begin{equation*}
     m = f^{-1}(f(m)) 
 \end{equation*}
 
-Tranquilli per ora abbiamo finito con il nozionismo matematico. Per ora.
+Tranquilli, per ora abbiamo terminato con il nozionismo matematico.
 
 
-\subsubsection{Chiave} una chiave è una qualsiasi \textbf{stringa} o anche più sempliceemnte un \textbf{numero}, ma la caratteristica principale è che una chiave deve \textbf{rimanere privata}, perchè la chiave permette di criptate e ddecriptare i messaggi, quindi se qualcuno riesce a rintracciare la vostra chiave privata vi potrà leggere tutti i messaggi che mandate e che ricevete. L'idea della chiave in crittografia è uguale alla \textbf{password}, infatti alla stessa maniera se qualcuno vi ruba la password vi può entrare nell'account. In realtà la chiave può anche essere un qualcosa si più complicato: come un \textbf{punto nel piano cartesiano} (usato nella \textit{Elliptic Curve Cryptografy}). 
+\subsubsection{Chiave} 
 
-Quindi per evitare confunsione correggiamo la definizione di prima dicendo che una chiave è un qualsiasi \textbf{dato}, oppure un \textbf{insieme di dati},  che deve rimanere \textbf{segreto}.
+Una chiave è una qualsiasi \textbf{stringa} o, più semplicemente, un \textbf{numero}; la caratteristica principale è che una chiave deve \textbf{rimanere privata}, perché permette di cifrare e decifrare i messaggi. Se qualcuno riuscisse a rintracciare la vostra chiave privata, potrebbe leggere tutti i messaggi che inviate e ricevete. L’idea della chiave in crittografia è simile a quella di una \textbf{password}: allo stesso modo, se qualcuno vi ruba la password, può accedere al vostro account. In realtà, la chiave può anche essere qualcosa di più complesso, come un \textbf{punto nel piano cartesiano} (usato nella \textit{Elliptic Curve Cryptography}).
 
-In realtà vedremo verso metà corso che esiste anche una così detta \textbf{chiave pubblica}, ovverò una chiave come la abbiamo definita fino ad ora ma \textbf{chiunque la può sapere}. Se vi sembra strano e contro intuitivo quando lo vedremo sarà tutto chiaro.
+Quindi, per evitare confusione, correggiamo la definizione precedente dicendo che una chiave è un qualsiasi \textbf{dato}, oppure un \textbf{insieme di dati}, che deve rimanere \textbf{segreto}.
 
-\subsubsection{Rotto} un sistema crittografico si definisce \textbf{Rotto} qualora si riesca a decifrare un messaggio criptato senza la chiave. Un sistema rotto chiaramente non si può usare perchè chiunque riuscirebbe a decriptare il messaggio. Un esempio di sitema rotto è il \textbf{DES} (che vedremo nel capito Cifrari a Blocchi). Il DES è stato inventato nel 1976 e all'inizio era molto usato, ma il problema è che usava una chiave a lunghezza fissa: 54 bit. Ad oggi purtroppo una chiave a 54 bit è soggetta ad attacchi \textbf{brute-force} \footnote{Attacchi in cui si provano tutte le possibili combinazioni di una chiave, chiaramente richiede molto tempo ma per chiavi molto piccole (come DES) può funzionare} e per questo oggi non si può più usare il DES per cifrare ed è stato stituito dall' \textbf{AES}.
+In realtà, vedremo verso metà corso che esiste anche una cosiddetta \textbf{chiave pubblica}, ovvero una chiave come quella che abbiamo definito fino a ora, ma che \textbf{chiunque può conoscere}. Se vi sembra strano o controintuitivo, quando lo vedremo tutto sarà chiaro.
+
+\newpage
+
+\subsubsection{Rotto} 
+
+Un sistema crittografico si definisce \textbf{rotto} qualora sia possibile decifrare un messaggio criptato senza conoscere la chiave. Un sistema rotto, chiaramente, non può essere utilizzato, perché chiunque riuscirebbe a decifrare il messaggio. Un esempio di sistema rotto è il \textbf{DES} (che vedremo nel capitolo “Cifrari a Blocchi”). Il DES è stato inventato nel 1976 e, all’inizio, era molto usato; il problema era che utilizzava una chiave a lunghezza fissa: 54 bit. Ad oggi, purtroppo, una chiave a 54 bit è soggetta ad attacchi \textbf{brute-force}\footnote{Attacchi in cui si provano tutte le possibili combinazioni di una chiave; richiedono molto tempo, ma per chiavi molto piccole (come il DES) possono funzionare}, e per questo oggi il DES non può più essere usato per cifrare ed è stato sostituito dall’\textbf{AES}.
 
 
+
+
+
+
+
+
+\subsection{Principio di Kerckhoffs}
+
+Ora che abbiamo iniziato a familiarizzare con i primi termini della crittografia, possiamo comprendere il principio fondante della disciplina: il \textbf{Principio di Kerckhoffs}.
+
+
+\begin{teorema}{Principio di Kerckhoffs}{}
+La sicurezza di un sistema crittografico deve dipendere unicamente dalla chiave segreta e non dalla segretezza dell’algoritmo stesso.
+
+\end{teorema}
+
+Sostanzialmente, Kerckhoffs afferma che non deve essere segreto \textbf{l’algoritmo di cifratura}; la forza di un sistema crittografico deriva invece dalla difficoltà di romperlo, e non dalla segretezza dell’algoritmo.
+
+
+Per questo motivo, oggi sappiamo perfettamente quali algoritmi utilizzano i vari siti e le app; non è un rischio conoscere il metodo con cui viene criptato un messaggio, perché la sicurezza risiede nella segretezza della chiave, che, chiaramente, deve rimanere privata. 
+
+
+Per esempio, secondo Kerckhoffs, se tu e un tuo amico volete creare un sistema per scambiarvi messaggi segreti, non potete semplicemente utilizzare un sistema debole mantenendolo segreto a tutti gli altri; se qualcuno riuscisse a scoprire l’algoritmo, potrebbe leggere tutti i vostri messaggi. i messaggi.
 
 
 
 \newpage
 
-\subsection{Principio di Kerckhoffs}
-
-Ora che abbiamo iniziato a masticare i primi termini della Crittografia possiamo capire il prinicpio fondante della crittografia: \textbf{Il Principio di Kerckhoffs} (Occhio a non leggere kirchhoff che riguarda elettronica).
-
-\begin{teorema}{Principio di Kerckhoffs}{}
-la sicurezza di un sistema crittografico deve dipendere unicamente dalla chiave segreta, e non dalla segretezza dell'algoritmo stesso
-\end{teorema}
-
-Sostanzialmente Kerckhoffs dice che non deve essere segreto \textbf{l'algoritmo di cifratura} ma la forza di un sistema crittografico è data dalla difficilità di rompere il sistema stesso, e non dalla segretezza dell'algoritmo.
-
-Per questo motivo noi oggi sappiamo perfettamente come che algoritmi usano i vari siti/app perchè non è un rischio sapere come viene criptato il messaggio, ma la sicurezza sta nella segretezza della chiave che quella chiaramente deve rimanere segreta.
-
-Per esempio per Kerckhoffs, se te e un tuo amico volete creare un sistema per potervi scambiare messaggi segreti, non potete usare un sistema debole ma mantenendolo segreto a tutti gli altri, anche perchè se qualcuno riuscisse a scoprire l'algoritmo vi leggerebbe tutti i messaggi.
-
-
-
-
 \subsection{Il problema dello scambio della Chiave}
 
-Prima di cominciare a parlare della classificazione dei sistemi crittografici, serve che parliamo del problema dello scambio della chiave. Ripetendo quanto visto fino ad ora, la crittografia studia come due utenti possano scambiarsi dei messaggi in maniera che nessun altro ne possa leggere il contenuto e abbiamo capito che il messaggio viene crittato, e poi decriptato, tramite un algoritmo. Abbiamo anche capito che un algoritmo ha bisogno di una chiave per poter cifrare i messaggi, e la chiave la deve avere solo chi manda il messaggio e chi lo deve ricevere e nessun altro (altrimenti anche altri utenti potrebbero decrittare i messaggi), però non abbiamo ancora pensato come i due utenti possano scambiarsi una chiave comune, o comunque mettersi d'accordo su una chiave da usare per il sistema.
+Prima di cominciare a parlare della classificazione dei sistemi crittografici, è necessario affrontare il problema dello scambio della chiave. Ripetendo quanto visto finora, la crittografia studia come due utenti possano scambiarsi messaggi in modo che nessun altro ne possa leggere il contenuto. Abbiamo capito che il messaggio viene cifrato e poi decifrato tramite un algoritmo. Inoltre, un algoritmo ha bisogno di una chiave per cifrare i messaggi, e la chiave deve essere posseduta solo da chi invia il messaggio e da chi lo deve ricevere; nessun altro dovrebbe conoscerla, altrimenti anche altri utenti potrebbero decifrare i messaggi. Tuttavia, non abbiamo ancora considerato come i due utenti possano scambiarsi una chiave comune o, comunque, concordare su una chiave da usare nel sistema.
+
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\linewidth]{logos/critpo5pdf.pdf}
 \end{figure}
 
-In questa immagine l'utente A ha generato una chiave da usare per crittare i messaggi ma deve trovare un modo per inviarla a B (così che lui possa decrittare i messaggi di A) senza che l'intercettatore riesca ad avere la chiave. Questo problema è stato risolto tramite i sistemi \textbf{Asimmetrici}, come sia possibile lo vedremo quando li studieremo nel dettaglio, per ora vi basta sapere che questo problema dello scambio è risolto da questi tipi di sistemi.
-
+In questa immagine, l’utente A ha generato una chiave da usare per cifrare i messaggi, ma deve trovare un modo per inviarla a B (così che lui possa decifrare i messaggi di A) senza che l’intercettatore riesca a intercettarla. Questo problema è stato risolto tramite i sistemi \textbf{asimmetrici}; come ciò sia possibile lo vedremo quando li studieremo nel dettaglio. Per ora, vi basta sapere che lo scambio della chiave è risolto da questi tipi di sistemi.
 
 
 
 \subsection{Le prime Classificazioni}
 
-I sistemi crittografici si dividono in molte sottocategorie, ognuno con le sue caratteristiche. Per comprenderle meglio vediamo subito una mappa riassuntiva su tutte le categorie, e poi le commentiamo una ad una, perciò ecco a voi la mappa
+I sistemi crittografici si dividono in diverse sottocategorie, ognuna con le proprie caratteristiche. Per comprenderle meglio, vediamo subito una mappa riassuntiva di tutte le categorie e poi le commenteremo una ad una. Perciò, ecco a voi la mappa:
 
 \begin{figure}[h]
     \centering
@@ -141,40 +170,46 @@ I sistemi crittografici si dividono in molte sottocategorie, ognuno con le sue c
 
 
 
-La prima grande distinzione nella crittografia moderna è la differenza tra sistema \textbf{Simmetrico} e \textbf{Asimmetrico}. Un sistema simmetrico utilizza \textbf{una sola chiave} che deve rimanere sempre privata, mentre i sistemi asimmetrici hanno \textbf{2 chiavi: una privata e una pubblica}. I due sistemi sono uno complementare all'altro e ora vedremo le principali pro e contro di entrambi.
+La prima grande distinzione nella crittografia moderna è quella tra sistemi \textbf{simmetrici} e \textbf{asimmetrici}. Un sistema simmetrico utilizza \textbf{una sola chiave}, che deve rimanere sempre privata, mentre i sistemi asimmetrici hanno \textbf{due chiavi: una privata e una pubblica}. I due sistemi sono complementari l’uno all’altro e, ora, vedremo i principali vantaggi e svantaggi di entrambi.
 
 Sistemi Simmetrici:
 
 \begin{itemize}
-    \item Sono veloci computazionalmente, nel senso che i computer sono veloci da compiere gli algoritmi di cifratura e decifratura, infatti questi algoritmi usano delle combinazioni di operazioni booleane (come lo \textbf{XOR}) e operazioni su matrici, conti che i computer sanno fare in maniera eccellente. In certi casi c'è la possibilità di parallelizzare dei passaggi per velocizzare ulteriormente
-    \item Non risolvono il problema dello scambio della chiave 
+    \item I sistemi simmetrici sono veloci dal punto di vista computazionale, nel senso che i computer possono eseguire rapidamente gli algoritmi di cifratura e decifratura. 
+    
+    Questi algoritmi utilizzano combinazioni di operazioni booleane (come lo \textbf{XOR}) e operazioni su matrici, calcoli che i computer sanno eseguire in maniera eccellente. In alcuni casi, è anche possibile parallelizzare alcune fasi per velocizzare ulteriormente il processo.
+     
+    \item Tuttavia, i sistemi simmetrici non risolvono il problema dello scambio della chiave.
 \end{itemize}
 
 Sistemi Asimmetrici:
 
 \begin{itemize}
-    \item Risolvono il problema dello scambio della chiave, nel senso che questi sistemi non hanno bisogno che i due utenti si siano scambiati la chiave.
-    \item Sono più lenti computazionalmente, perchè devono fare operazioni con numeri enormi (parliamo di numeri a 600 cifre!)
+    \item I sistemi asimmetrici risolvono il problema dello scambio della chiave, nel senso che non è necessario che i due utenti abbiano precedentemente condiviso una chiave segreta.
+    \item I sistemi asimmetrici sono più lenti dal punto di vista computazionale, perché devono eseguire operazioni su numeri molto grandi (parliamo di numeri con fino a 600 cifre!).
 \end{itemize}
 
 
-Queste intanto sono le prime differenze tra asimmetrici e simmetrici, e vediamo che sono complementari, infatti difficilmente nei progetti si usa solamente uno o l'altro, perchè è meglio usare entrambi. Per esempio, il protocollo \textbf{HTTPS}, che serve per inviare le pagine web in maniera crittata, crea una chiave per un sistema \textbf{simmetrico} ma la chiave viene crittata tramite un sistema \textbf{asimmetrico}, in questa maniera i due utenti avranno la chiave in \textbf{maniera sicura} (perchè è stata inviata tramite asimmetrico) ma nella comunicazione viene usata un sistema simmetrico perchè è più \textbf{veloce}.
+Queste sono, intanto, le prime differenze tra sistemi asimmetrici e simmetrici, e si nota che sono complementari: difficilmente, infatti, nei progetti si utilizza solo uno dei due, perché è preferibile impiegare entrambi. Per esempio, il protocollo \textbf{HTTPS}, che serve per inviare le pagine web in modo cifrato, crea una chiave per un sistema \textbf{simmetrico}, ma la chiave viene cifrata tramite un sistema \textbf{asimmetrico}. In questo modo, i due utenti ottengono la chiave in \textbf{maniera sicura} (perché è stata inviata tramite un sistema asimmetrico), mentre la comunicazione vera e propria utilizza un sistema simmetrico, poiché è più \textbf{veloce}.
+
+\newpage
 
 \subsubsection{Sistemi Simmetrici - OTP}
 
-Tra le due categorie, i sistemi simmetrici sono i primi che vedremo perchè sono tendenzialmente più semplici. Come si vede dal grafico, i simmetrici si dividono in altre 3 categorie: \textbf{OTP}, \textbf{Stream} e \textbf{a Blocchi}. Il primo che vedremo è \textbf{OTP} (\textit{One Time Pad}) e sarà l'unico sistema che è definito \textbf{perfettamente Sicuro}, ovvero che partendo dal messaggio cifrato (senza la chiave) è impossibile ritornare al messaggio originario. Mentre tutti gli altri sistemi che vedremo con attacchi \textbf{brute-force} si può risalire al messaggio originale senza la chiave di cifratura. Chiaramente gli attacchi sono infattibili perchè richiederebbero anni per decifrare, ma nell'ipotesi di avere un computer infinitivamente potente, il cifrario OTP sarebbe l'unico \textbf{impossibile} da tornare al messaggio originario. 
+Tra le due categorie, i sistemi simmetrici sono i primi che vedremo, poiché sono tendenzialmente più semplici. Come si nota dal grafico, i simmetrici si suddividono in altre tre categorie: \textbf{OTP}, \textbf{Stream} e \textbf{a Blocchi}. Il primo che analizzeremo è \textbf{OTP} (\textit{One Time Pad}), l’unico sistema definito \textbf{perfettamente sicuro}, ovvero tale per cui, partendo dal messaggio cifrato senza la chiave, è impossibile risalire al messaggio originale. Tutti gli altri sistemi, se sottoposti ad attacchi \textbf{brute-force}, permettono di risalire al messaggio originale senza la chiave di cifratura. Chiaramente, tali attacchi sono praticamente infattibili perché richiederebbero anni per essere completati; tuttavia, nell’ipotesi di disporre di un computer infinitamente potente, il cifrario OTP sarebbe l’unico \textbf{impossibile} da decifrare senza la chiave.
 
-Dopo questa definizione potreste pensare che potremmo usare sempre e solo l'\textbf{OTP} ma purtroppo ha un pecca che lo rende inutilizzabile: che bisogna cambiare sempre chiave dopo ogni cifratura, perchè con l' OTP se due messaggi sono stati cifrati con la stessa chiave, tramite delle \textbf{criptoanalisi} si può risalire alla chiave e ai messaggi originali. E se qualcuno pensanse di generare sempre nuovi chiavi diventerebbe eccessivamente pesante e insostenibile per una comunicazione.
-
+Dopo questa definizione, potreste pensare che si potrebbe usare sempre e solo l’\textbf{OTP}, ma purtroppo ha un limite che lo rende poco praticabile: è necessario cambiare la chiave dopo ogni cifratura. Infatti, se due messaggi vengono cifrati con la stessa chiave, tramite delle \textbf{criptoanalisi} è possibile risalire sia alla chiave sia ai messaggi originali. Se qualcuno pensasse di generare sempre nuove chiavi, la gestione diventerebbe eccessivamente complessa e insostenibile per la comunicazione.
 
 \subsubsection{Sistemi Simmetrici - PRNG / Stream}
 
-La categoria successiva riguarda è quella degli \textbf{Stream}, che però vedremo pochissimo perchè non sono utilizzati. Semplicemente gli Stream funzionano generando un \textbf{flusso} (per questo motivo prende il nome di \textit{Stream}) di \textbf{Numeri Casuali}, e questi numeri casuali vengono usati per cifrare tramite \textbf{OTP} i messaggi. Il problema che la generazione di numeri casuali per i computer è \textbf{impossibile} infatti i computer sono sistermi \textbf{deterministici}. Infatti per generare dei numeri per questo sistema si usano algoritmi detti \textbf{PRNG} (\textit{Preudo Randomic Number Generator}) che provano a generare numeri che sembrano casuali ma che comunque hanno delle correlazioni tra di loro e questo con determinati attacchi si può trovare i numeri successivi allo stream anche senza chiave. Per questo motivo questa tipologia di cifrari oggi non sono per nulla usati.
+La categoria successiva è quella degli \textbf{Stream}, che però vedremo solo brevemente, poiché non sono molto utilizzati. Gli Stream funzionano generando un \textbf{flusso} (da cui il nome \textit{Stream}) di \textbf{numeri casuali}, che vengono poi utilizzati per cifrare i messaggi tramite l’\textbf{OTP}. Il problema è che la generazione di numeri casuali per i computer è \textbf{impossibile}, poiché i computer sono sistemi \textbf{deterministici}. Per produrre numeri per questo sistema, si utilizzano algoritmi detti \textbf{PRNG} (\textit{Pseudo Random Number Generator}), che cercano di generare numeri apparentemente casuali ma che presentano comunque correlazioni tra loro; con determinati attacchi, è possibile prevedere i numeri successivi dello stream anche senza conoscere la chiave. Per questo motivo, questa tipologia di cifrari oggi non viene quasi mai utilizzata.
+
 
 \newpage
 \subsubsection{Sistemi Simmetrici - A Blocchi}
 
-Finalmente arriviamo ai veri sistemi simmetrici: Quelli a blocchi. Questi cifrari sono quelli che vengono usati oggigiorno per la loro sicurezza e \textbf{velocità}. Ad ogni modo i cifrari a blocchi si basano rompendo il messaggio in blocchi a n bit. Supponiamo di voler criptare il messaggio a 120 bit e noi abbiamo un cifrario a blocchi che prende blocchi da 50 bit. Allora vuol dire che il nostro messaggio \textbf{sarà diviso in 3 blocchi: } primo da 50 bit, secodno da 50 bit e l'ultimo da 20 bit, poi l'ultimo se non è grande quanto il blocco del cifrario vengono aggiunti degli zeri (o un qualsiasi \textbf{padding}) in modo che raggiunga la lunghezza di 50 bit.
+Finalmente arriviamo ai veri sistemi simmetrici: quelli a blocchi. Questi cifrari sono quelli utilizzati oggigiorno per la loro sicurezza e \textbf{velocità}. I cifrari a blocchi funzionano suddividendo il messaggio in blocchi di n bit. Supponiamo di voler cifrare un messaggio di 120 bit e di avere un cifrario a blocchi che opera su blocchi da 50 bit. In questo caso, il nostro messaggio \textbf{sarà diviso in 3 blocchi:} il primo da 50 bit, il secondo da 50 bit e l’ultimo da 20 bit. Se l’ultimo blocco non raggiunge la dimensione prevista dal cifrario, vengono aggiunti degli zeri (o un qualsiasi \textbf{padding}) in modo che raggiunga la lunghezza di 50 bit.
+
 
 \begin{figure}[h]
     \centering
@@ -183,7 +218,7 @@ Finalmente arriviamo ai veri sistemi simmetrici: Quelli a blocchi. Questi cifrar
 
 
 
-Questo meccanismo di creare dei blocchi serve perchè poi i blocchi vengono trasformati in \textbf{matrici} ed è per questo che serve che abbaiano una grandezza definita, perchè gli altoritmi in sè sfruttano operazioni su matrici per criptare il messaggio, e alla stessa maniera il messaggio cifrato sarà anch'esso una matrice grande uguale che viene riportato a messaggio. è importante capire che visto che l'algoritmo prende un blocco alla volta e lo cripta e chiaramente allo stesso blocco equivale lo stesso blocco cifrato, quindi vuole dire che se due blocchi all'interno del messaggio sono uguali avranno lo stesso blocco cifrato. 
+Questo meccanismo di creare blocchi è necessario perché ogni blocco viene poi trasformato in una \textbf{matrice}. Per questo motivo, è importante che ogni blocco abbia una dimensione definita, poiché gli algoritmi sfruttano operazioni su matrici per cifrare il messaggio. Allo stesso modo, il messaggio cifrato sarà anch’esso una matrice della stessa dimensione, che verrà poi riconvertita in messaggio. È importante comprendere che, poiché l’algoritmo cifra un blocco alla volta, lo stesso blocco in input produce sempre lo stesso blocco cifrato. Ciò significa che, se due blocchi all’interno del messaggio originale sono identici, avranno lo stesso blocco cifrato.
 
 
 \begin{figure}[h]
@@ -191,11 +226,91 @@ Questo meccanismo di creare dei blocchi serve perchè poi i blocchi vengono tras
     \includegraphics[width=\linewidth]{logos/cripto7.pdf}
 \end{figure}
 
-E poi i blocchi cifrati vengono riuniti per formare il messaggio cifrato. Per evitare che due blocchi uguali forniscano lo stesso output (perchè potrebbe aiutare per capire il messaggio originale) si sono inventati i \textbf{Modi di Funzionamento dei cifrari a blocchi}, che vedremo con calma cosa vogliono dire.
+I blocchi cifrati vengono poi riuniti per formare il messaggio cifrato. Per evitare che due blocchi identici producano lo stesso output (cosa che potrebbe aiutare a risalire al messaggio originale), sono stati ideati i \textbf{modi di funzionamento dei cifrari a blocchi}, che vedremo con calma e in dettaglio più avanti.
 
-La forza di questi cifrari è che usano soltanto operazioni \textbf{booleane} (\textbf{and},\textbf{or}, \textbf{xor} e \textbf{not}) e operazioni \textbf{tra matrici}, il chè le rende molto veloci visto che queste operazioni  sotto ottimizzate nei computer odierni
+\newpage
 
-I principali algoritmi a blocchi sono \textbf{DES} (\textit{Data Encryption Standard}) e \textbf{AES} (\textit{Advanced Encryption Standard}). Il nacque nel 1976 e per i successivi ventanni fu lo standard per i cifrari a blocchi, nel 1999 però dei ricercatori riuscino a \textbf{rompere} il cifrario rendendolo insicuro per via della poca lunghezza della chiave, che permetteva un attacco brute-force. Al suo posto arrivo \textbf{AES} nel 1998 che ad oggi è ancora un sistema sicuro. In più riuscirono a "sistemare" il DES inventando il \textbf{3DES} (\textit{Triple DES}) che non è altro che un messaggio cifrato 3 volte con il DES, e ad oggi questo scamotaggio permette al DES di essere usato ancora (ovviamente oggi si usa solo i 3DES e non più il DES singolo).
+La forza di questi cifrari è che utilizzano soltanto operazioni \textbf{booleane} (\textbf{and}, \textbf{or}, \textbf{xor} e \textbf{not}) e operazioni \textbf{su matrici}, il che li rende molto veloci, poiché queste operazioni sono altamente ottimizzate nei computer odierni.
+
+
+I principali algoritmi a blocchi sono \textbf{DES} (\textit{Data Encryption Standard}) e \textbf{AES} (\textit{Advanced Encryption Standard}). Il DES nacque nel 1976 e, per i vent’anni successivi, fu lo standard per i cifrari a blocchi. Nel 1999, però, dei ricercatori riuscirono a \textbf{rompere} il cifrario, rendendolo insicuro a causa della breve lunghezza della chiave, che permetteva un attacco brute-force. Al suo posto arrivò \textbf{AES} nel 1998, che ad oggi è ancora considerato un sistema sicuro. Inoltre, fu creato il \textbf{3DES} (\textit{Triple DES}), che consiste nel cifrare un messaggio tre volte con il DES; questo stratagemma permette ancora oggi di usare il DES in forma sicura, anche se oggi si utilizza quasi esclusivamente il 3DES e non più il DES singolo.
+
+
+\subsubsection{Sistemi Asimmetrici - RSA}
+
+Passando all'altro lato del nostro schema arriviamo ai sistemi \textbf{asimmetrici}. Come abbiamo gia detto, questi sistemi hanno come caratteristica principale che non hanno solamente una chiave ma ne hanno \textbf{una privata e una pubblica}. \text{RSA} (che è l'acronimo dei 3 crittografi che lo hanno inventato) è un algoritmo che permette di creare le due chiavi in maniera sicura, e permette anche ci \textbf{cifrare e decifrare} (cosa che negli algoritmi a \textbf{Scambi di chiave} non è contemplata). RSA sfrtutta la difficoltà di \textbf{Fattorizzare numeri grandi} (che come dicevamo stiamo parlando di numeri a 600 cifre circa). Infatti ad oggi, l'unico modo che abbiamo per fattorizzare un numero è provare a dividere tutti i numeri minori di esso. Quindi per i computer odierni non è sostenibile un calcolo così impegnativo.  
+
+\vspace{0.5cm}
+
+
+\begin{algorithm}[H]
+\caption{Fattorizzazione di un numero $n$}
+\KwIn{$n$}
+\KwOut{$list$}
+$list \gets []$\;
+\For{$k \gets 2$ \KwTo $n-1$}{
+  \If{$n \bmod k = 0$}{
+    $list.append(k)$\;
+  }
+}
+\Return $list$\;
+\end{algorithm}
+
+
+\newpage
+
+\subsubsection{Sistemi Asimmetrici - Scambio di Chiavi}
+Tra gli algoritmi asimmetrici abbiamo anche quelli che io ho chiamato \textbf{Scambio di Chiave}, i quali si occupano esclusivamente di \textbf{generare una chiave condivisa tra due utenti}, che poi sarà utilizzata con un algoritmo simmetrico come l'\textbf{AES} o il \textbf{DES}. Questo approccio consente di combinare i vantaggi dei sistemi simmetrici (\textbf{velocità}) con quelli dei sistemi asimmetrici (\textbf{sicurezza}).
+
+
+Tra questi algoritmi, i due principali sono: \textbf{Diffie-Hellman} (dal nome dei ricercatori che lo hanno inventato) e \textbf{ECC} (\textit{Elliptic Curve Cryptography}). Diffie-Hellman, come vedremo, è molto semplice e sfrutta un meccanismo di potenze e moduli, mentre ECC è più particolare: utilizza infatti una curva ellittica definita da un’equazione del tipo seguente:
+
+
+\begin{equation*}
+    y^2 = x^3 + ax + b    
+\end{equation*}
+
+che ha come grafico:
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{logos/Screenshot from 2025-09-01 18-49-58.png}
+\end{figure*}
+
+L'idea alla base di ECC è quella di \textbf{modulare la curva secondo un numero primo $p$} e di scegliere un punto casuale su di essa, sul quale eseguire una particolare operazione, la \textbf{somma tra punti}, che vedremo con calma, poiché risulta particolarmente complessa.
+
+Ad ogni modo, sia Diffie-Hellman che ECC sfruttano la difficoltà di calcolare il \textbf{logaritmo discreto}. In altre parole, per noi e per i computer è semplice risolvere la seguente equazione:
+
+\begin{equation*}
+    2 ^ x = 9
+\end{equation*}
+
+Infatti, per risolverlo basta calcolare il logaritmo.
+
+\begin{equation*}
+    x = log _ {2} 9
+\end{equation*}
+
+\newpage
+
+Il discorso cambia però quando applichiamo questo ragionamento ai moduli (che vedremo meglio in seguito; se non li avete mai visti, potete saltare al prossimo paragrafo). Infatti, se consideriamo un’equazione del genere:
+
+\begin{equation*}
+    2 ^ x \equiv 9 \mod 17
+\end{equation*}
+
+
+È complicatissimo risolverla, perché non è più possibile applicare il logaritmo a causa del modulo. Come per la fattorizzazione, ad oggi non esistono algoritmi che permettano di risolvere queste equazioni in tempi ragionevoli.
+
+
+\subsubsection{Post-Quantum}
+Ultimo appunto prima di partire con i cifrari antichi: voglio fare una piccola introduzione sui \textbf{Cifrari Post-Quantum}, perché gli algoritmi \textbf{RSA}, \textbf{Diffie-Hellman} e \textbf{ECC} sono attualmente molto difficili da rompere con i computer moderni, ma è possibile che, con i computer \textbf{quantistici}, possano essere violati anche in pochi secondi. Infatti, i computer quantistici sono particolarmente adatti a risolvere problemi su cui si basano questi algoritmi: ad esempio, possono fattorizzare numeri enormi o calcolare il logaritmo discreto in tempi brevissimi.
+
+Tuttavia, ad oggi i computer quantistici sono ancora in fase di sviluppo e c’è ancora molta strada da fare: per esempio, il numero più grande mai fattorizzato con un computer quantistico è \textbf{21}. Non si può sapere come saranno i computer quantistici in futuro; per questo motivo, i maggiori ricercatori stanno lavorando per creare nuovi cifrari \textbf{difficili da rompere anche per computer quantistici}.
+
+Tra questi, quelli che stanno ricevendo maggiore attenzione dalla comunità scientifica sono i \textbf{Lattice-Based}. Si tratta di algoritmi che sfruttano i \textbf{reticoli} (in inglese \textit{Lattice}), ovvero "piani cartesiani" a n dimensioni, ad esempio $\mathbb{Z} ^ n$.
+
+Si possono generare dei vettori linearmente indipendenti a $n$ dimensioni. A partire da questi, è possibile definire un punto e determinare il percorso più semplice per raggiungerlo usando i nuovi vettori. Ad ogni modo, questi cifrari sono particolarmente complessi, ma rappresentano anche il futuro della crittografia. Per questo motivo, in questo corso non li tratteremo, ma consiglio a tutti di studiarli autonomamente.
 
 
 \end{document}
