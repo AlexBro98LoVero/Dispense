@@ -5,6 +5,10 @@
 \usepackage[ruled,vlined]{algorithm2e}
 
 
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} % Use a recent compatibility version
+\usetikzlibrary{arrows.meta} % For nicer arrows
+
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems, skins}  
 
@@ -35,7 +39,7 @@ In questo corso andremo a vedere le basi della \textbf{Crittografia moderna}. In
 
 \begin{figure}[h]
      \centering
-    \includegraphics[width=0.6\linewidth]{logos/cripto1.pdf}
+    \includegraphics[width=0.6\linewidth]{logos/0_1_cripto.pdf}
 \end{figure}
 
 In questa immagine l'utente A manda un messaggio criptato all’utente B; in questo modo solo A e B potranno leggere il contenuto del messaggio, mentre l’intercettatore, anche se riuscisse ad averne una copia, non sarebbe in grado di leggerlo (dato che è criptato).
@@ -59,7 +63,7 @@ La cifratura di un messaggio è il processo che permette di \textbf{alterare} un
 
 \begin{figure}[h]
      \centering
-    \includegraphics[width=0.8\linewidth]{logos/cripto2.pdf}
+    \includegraphics[width=0.8\linewidth]{logos/0_2_cripto.pdf}
 \end{figure}
 
 In questo caso, il messaggio "\textbf{Ciao sono Alex}" tramite una cifratura è diventato \textbf{-QnbB\^{}DUxQxUP\^{}}; se qualcuno riuscisse a intercettare il messaggio cifrato, non capirebbe nulla.
@@ -72,7 +76,7 @@ La decifratura è il passaggio \textbf{inverso} della cifratura, nel senso che p
 
 \begin{figure}[h]
      \centering
-    \includegraphics[width=0.8\linewidth]{logos/cripto3.pdf}
+    \includegraphics[width=0.8\linewidth]{logos/0_3_cripto.pdf}
 \end{figure}
 
 
@@ -150,7 +154,7 @@ Prima di cominciare a parlare della classificazione dei sistemi crittografici, �
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\linewidth]{logos/critpo5pdf.pdf}
+    \includegraphics[width=0.6\linewidth]{logos/0_5_cripto.pdf}
 \end{figure}
 
 In questa immagine, l’utente A ha generato una chiave da usare per cifrare i messaggi, ma deve trovare un modo per inviarla a B (così che lui possa decifrare i messaggi di A) senza che l’intercettatore riesca a intercettarla. Questo problema è stato risolto tramite i sistemi \textbf{asimmetrici}; come ciò sia possibile lo vedremo quando li studieremo nel dettaglio. Per ora, vi basta sapere che lo scambio della chiave è risolto da questi tipi di sistemi.
@@ -163,7 +167,7 @@ I sistemi crittografici si dividono in diverse sottocategorie, ognuna con le pro
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{logos/cripto4.pdf}
+    \includegraphics[width=\linewidth]{logos/0_4_cripto.pdf}
 \end{figure}
 
 
@@ -213,7 +217,7 @@ Finalmente arriviamo ai veri sistemi simmetrici: quelli a blocchi. Questi cifrar
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{logos/cripto6.pdf}
+    \includegraphics[width=\linewidth]{logos/0_6_cripto.pdf}
 \end{figure}
 
 
@@ -223,7 +227,7 @@ Questo meccanismo di creare blocchi è necessario perché ogni blocco viene poi 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{logos/cripto7.pdf}
+    \includegraphics[width=\linewidth]{logos/0_7_cripto.pdf}
 \end{figure}
 
 I blocchi cifrati vengono poi riuniti per formare il messaggio cifrato. Per evitare che due blocchi identici producano lo stesso output (cosa che potrebbe aiutare a risalire al messaggio originale), sono stati ideati i \textbf{modi di funzionamento dei cifrari a blocchi}, che vedremo con calma e in dettaglio più avanti.
@@ -272,10 +276,30 @@ Tra questi algoritmi, i due principali sono: \textbf{Diffie-Hellman} (dal nome d
 
 che ha come grafico:
 
-\begin{figure*}[h]
-    \centering
-    \includegraphics[width=0.6\linewidth]{logos/Screenshot from 2025-09-01 18-49-58.png}
-\end{figure*}
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle, % Axes pass through the origin
+    xlabel=$x$,
+    ylabel=$y$,
+    grid=both,
+    enlargelimits=0.1, % Add some padding
+    domain=-3:4,    % x-range for the plot
+    samples=1300,      % Number of points (for a smooth curve)
+    smooth,           % Makes the line smoother
+    width=0.8\textwidth
+]
+% Plot the top half of the curve
+\addplot[maincolor, thick] {sqrt(x^3 - 3*x + 5)};
+
+% Plot the bottom half of the curve
+\addplot[maincolor, thick] {-sqrt(x^3 - 3*x + 5)};
+
+\end{axis}
+\end{tikzpicture}
+\end{figure}
 
 L'idea alla base di ECC è quella di \textbf{modulare la curva secondo un numero primo $p$} e di scegliere un punto casuale su di essa, sul quale eseguire una particolare operazione, la \textbf{somma tra punti}, che vedremo con calma, poiché risulta particolarmente complessa.
 
@@ -293,7 +317,7 @@ Infatti, per risolverlo basta calcolare il logaritmo.
 
 \newpage
 
-Il discorso cambia però quando applichiamo questo ragionamento ai moduli (che vedremo meglio in seguito; se non li avete mai visti, potete saltare al prossimo paragrafo). Infatti, se consideriamo un’equazione del genere:
+Il discorso cambia però quando applichiamo questo ragionamento ai moduli (che vedremo meglio in seguito; se non li avete mai visti, potete saltare al prossimo paragrafo). Infatti, se consideriamo un' equazione del genere:
 
 \begin{equation*}
     2 ^ x \equiv 9 \mod 17
