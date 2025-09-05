@@ -16,6 +16,8 @@
 \usepackage{xcolor}
 \usepackage{listings}
 
+
+\definecolor{maincolor}{HTML}{1E90FF}
 % Define colors for the code block
 \definecolor{commentgreen}{rgb}{0.13,0.55,0.13}
 \definecolor{stringblue}{rgb}{0.25,0.41,0.88}
@@ -44,7 +46,12 @@
 
 \section{Cifrari Antichi - Cesare}
 
-Cominciamo ad analizzare i primi cifrari e iniziamo dai primi cifrari mai inventati, infatti come avevamo gia detto nell'introduzione il \textbf{Cifrario di Cesare} risale all'impero romano. Il cifrario fu inventato per inviare ai legionari informazioni per proseguire la battaglia. Chiaramente non potevano mandarli i messaggi in chiaro, anche perchè se gli avversari ne venivano a conoscenza potevano rispondere con una contromossa. Per questo \textbf{Giulio Cesare} invento un cifrario che si basava sullo spostamento di un determinato numero di posizioni le lettere nell'alfabeto. Per esempio il classico esempio di cifrario di cesare è di \textbf{Spostare di 3 posizioni in dietro}. 
+Cominciamo ad analizzare i primi cifrari, iniziando dal più antico mai inventato: infatti, come avevamo già detto nell'introduzione, il \textbf{Cifrario di Cesare} risale all'Impero romano.  
+Il cifrario fu ideato per inviare ai legionari informazioni per proseguire la battaglia.  
+Chiaramente non potevano mandare i messaggi in chiaro, anche perché, se gli avversari ne venivano a conoscenza, potevano rispondere con una contromossa.  
+Per questo \textbf{Giulio Cesare} inventò un cifrario che si basava sullo spostamento di un determinato numero di posizioni delle lettere nell'alfabeto.  
+Un classico esempio del cifrario di Cesare è quello di \textbf{spostare di 3 posizioni indietro}.
+
 
 \begin{figure}[h]
     \centering
@@ -52,16 +59,20 @@ Cominciamo ad analizzare i primi cifrari e iniziamo dai primi cifrari mai invent
 \end{figure}
 
 
-Le lettere che "escono a sinistra" le associamo alle ultime 3 lettere
+Le lettere che "escono a sinistra" le associamo alle ultime tre lettere.
+
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\linewidth]{logos/1_2_cripto.pdf}
 \end{figure}
 
-Per cifrare un messaggio basta prendere ogni lettera del messaggio e trasformarlo nella lettere associata nella tabella. Ad esempio se volessi convertire la parola \textbf{Abbecce}, con il cifrario di cesare sarebbe \textbf{Deehffh}. 
+Per cifrare un messaggio basta prendere ogni lettera del testo in chiaro e sostituirla con la lettera corrispondente nella tabella.  
+Ad esempio, se volessimo cifrare la parola \textbf{Abbecce}, con il cifrario di Cesare diventerebbe \textbf{Deehffh}.
 
-Per decifrarlo invece basta fare lo stesso procedimento ma l'alfabeto va spostavo verso destra, quindi con questo esempio il cifrario di decifratura sarà
+
+Per decifrare, invece, basta applicare lo stesso procedimento, ma spostando l'alfabeto verso destra.  
+Con questo esempio, il testo decifrato sarà:
 
 \begin{figure}[h]
     \centering
@@ -71,9 +82,13 @@ Per decifrarlo invece basta fare lo stesso procedimento ma l'alfabeto va spostav
 
 \newpage
 
-In questo esempio abbiamo spostato l'alfabeto di 3 posizioni, ma questo è un numbero che possiamo scegliere noi a nostro piacimento. Secondo la tradizione Giulio Cesare usava il numero 3, però si possono anche spostare di quanto si vuole. Visto che questo numero è decisivo per la cifratura, il numero di spostamnenti non è altro che la \textbf{chiave} del sistema. Chiaramente ad una chiave diversa c'è un cifrario diverso, e di conseguenza una cifratura dei messaggi diversa. 
+In questo esempio abbiamo spostato l'alfabeto di tre posizioni, ma questo è un numero che possiamo scegliere liberamente.  
+Secondo la tradizione, Giulio Cesare utilizzava il numero tre, ma si può scegliere qualsiasi valore di spostamento.  
+Poiché questo numero è decisivo per la cifratura, il numero di spostamenti non è altro che la \textbf{chiave} del sistema.  
+Chiaramente, a chiavi diverse corrispondono cifrari diversi e, di conseguenza, differenti cifrature dei messaggi.
 
-Una possibile implementazione in python della cifrario di cesare a 3 spostamenti:
+
+Una possibile implementazione in Python del cifrario di Cesare con 3 spostamenti:
 
 \begin{lstlisting}[language=Python]
 def Cifratura_Cesare(mess):
@@ -83,7 +98,11 @@ def Decifratura_Cesare(mess):
     return "".join([chr(((ord(char) - ord('a') - 3) % 26) + ord('a')) for a in mess])
 \end{lstlisting}
 
-Online questa cifratura viene anche chiamata \textbf{ROT} (abbreviazione di \textit{ROTation}) affiancato dal numero si spostamenti. Quindi \textbf{ROT3} sarà con 3 spostamenti (come gli esempi di prima) mentre \textbf{ROT15} sposterà di 15 caselle. In python un'implementazione per un generico \textbf{ROT-n}
+
+Online, questa cifratura viene anche chiamata \textbf{ROT} (abbreviazione di \textit{ROTation}), seguita dal numero di spostamenti.  
+Quindi, \textbf{ROT3} corrisponde a 3 spostamenti (come negli esempi precedenti), mentre \textbf{ROT15} sposterà di 15 posizioni.  
+In Python, un'implementazione per un generico \textbf{ROT-n} potrebbe essere:
+
 
 \begin{lstlisting}[language=Python]
 def Cifratura_ROTn(mess, n):
@@ -96,8 +115,10 @@ def Decifratura_ROTn(mess, n):
 
 
 
+Quindi, se qualcuno vuole usare questo cifrario, basta scegliere un numero tra 1 e 25 e tenerlo segreto.  
+Tuttavia, questo metodo è soggetto ad attacchi \textbf{brute-force}: come abbiamo detto, questo cifrario ha al massimo \textbf{25 chiavi possibili}, quindi qualcuno potrebbe creare un programma che provi tutte le combinazioni.  
+Un possibile programma in Python:
 
-Quindi se qualcuno vuole usare questo cifrario basta che decida un numero tra 1 e 25 e tenerserlo per se stesso. Se non fosse che questo metodo è soggetto ad attacchi \textbf{brute-force} infatti come abbiamo detto questo cifrario ha al massimo \textbf{25 chiavi possibili}, quindi qualcuno potrebbe creare un programma che provi tutte le possibili combinazioni. Un possibile programma in python: 
 
 \begin{lstlisting}[language=Python]
 def attacco_rotn(messDaDecifrare):
@@ -109,7 +130,11 @@ def attacco_rotn(messDaDecifrare):
 \newpage
 
 \subsection{Cifrari Monoalfabetici}
-In realtà l'attacco brute force non è l'unico al quale è soggetto questo cifrario. Questo tipo di cifrario è definito \textbf{Monoalfabetico} perchè la stessa lettera viene sempre cifrato con la stessa lettera corrispondente. Tutti i cifrari Monoalfabetici sono soggetti ad attacchi detti \textbf{Letter Frequency}. Questo vuol dire che la \textbf{percentuali} di una lettera nel testo originale è la stessa della lettera cifrata nel testo cifrato. Facciamo un esempio con \textbf{Abbcccdddd}, che cifrato con ROT3 diventa \textbf{Deefffgggg}
+In realtà, l'attacco brute-force non è l'unico al quale è soggetto questo cifrario.  
+Questo tipo di cifrario è definito \textbf{monoalfabetico} perché la stessa lettera viene sempre cifrata con la stessa lettera corrispondente.  
+Tutti i cifrari monoalfabetici sono soggetti ad attacchi detti \textbf{Letter Frequency}.  
+Ciò significa che la \textbf{percentuale} di una lettera nel testo originale è la stessa della lettera corrispondente nel testo cifrato.  
+Facciamo un esempio con \textbf{Abbcccdddd}, che, cifrato con ROT3, diventa \textbf{Deefffgggg}.
 
 \vspace{0.2cm}
 \[
@@ -138,7 +163,10 @@ In realtà l'attacco brute force non è l'unico al quale è soggetto questo cifr
 \]
 
 \vspace{0.2cm}
-Questa caratteristica dei sistemi Monoalfabetici può essere sfruttata per decifrare, anche parzialmente, il messaggio. Questo perche noi possiamo creare delle tabelle con la frequenza di ogni lettera per ogni lingua. Per esempio la \textbf{tabella di frequenza} della lingua italiana è 
+Questa caratteristica dei sistemi monoalfabetici può essere sfruttata per decifrare, anche parzialmente, il messaggio.  
+Questo perché possiamo creare delle tabelle con la frequenza di ogni lettera per ciascuna lingua.  
+Ad esempio, la \textbf{tabella di frequenza} della lingua italiana è:
+
 
 \begin{table}[h]
 \centering
@@ -158,19 +186,23 @@ Questa caratteristica dei sistemi Monoalfabetici può essere sfruttata per decif
 link alla tabella completa : \href{https://www.sttmedia.com/characterfrequency-italian}{https://www.sttmedia.com/characterfrequency-italian}
 \end{center}
 
-Questa tabella vuol dire che di media, un messaggio/parola in italiano ha quelle probabilità che contenga quelle lettere. Quindi perchè stiamo facendo tutto questo discorso? perchè se noi facciamo la stessa analisi anche sul messaggio cifrato e paragoniamo le lettere più presenti nel messaggio cifrato con la tabella sopra può essere che qualche lettera la troviamo. Chiaramente più è lungo il messaggio più è probabile di indovinare le lettere. 
+Questa tabella indica che, in media, un messaggio o una parola in italiano ha quelle probabilità di contenere le rispettive lettere.  
+Quindi, perché stiamo facendo tutto questo discorso? Perché, se facciamo la stessa analisi anche sul messaggio cifrato e confrontiamo le lettere più frequenti nel messaggio cifrato con la tabella sopra, è possibile identificare alcune lettere.  
+Chiaramente, più è lungo il messaggio, più è probabile indovinare le lettere.
 
-\textbf{N.B.} Chiaramente esistono tabelle di frequenza per ogni lingua, io qua ho portato quella italiana come esempio.
+
+\textbf{N.B.} Chiaramente, esistono tabelle di frequenza per ogni lingua; qui ho riportato quella italiana come esempio.
 
 \newpage
 
-Facciamo un esempio pratico: supponiamo di avere questo messaggio:
+Facciamo un esempio pratico: supponiamo di avere il seguente messaggio:
 \vspace{0.2cm}
 
 \textit{hlvc irdf uvc crxf uz Tfdf, tyv mfcxv r dvqqfxzfief, kir ulv trkvev efe zekviifkkv uz dfekz, klkkf r jvez v r xfcwz, r jvtfeur uvccf jgfixviv v uvc izvekiriv uz hlvccz, mzve, hlrjz r le kirkkf, r izjkizexvijz, v r giveuvi tfijf v wzxlir uz wzldv, kir le gifdfekfizf r uvjkir, v le’rdgzr tfjkzvir urcc’rckir grikv; v zc gfekv, tyv zmz tfexzlexv cv ulv izmv, gri tyv iveur retfi gzu jvejzszcv rcc’fttyzf hlvjkr kirjwfidrqzfev, v jvxez zc glekf ze tlz zc crxf tvjjr, v c’Ruur izetfdzetzr, gvi izgzxczri gfz efdv uz crxf ufmv cv izmv, rccfekrereufjz uz elfmf, crjtzre c’rthlr uzjkveuvijz v irccvekrijz ze elfmz xfcwz v ze elfmz jvez. }
 \vspace{0.2cm}
 
-possiamo fare un'analisi di frequenza su questo messaggio, e lo mettiamo a \textbf{confronto} con la tabella di frequenza della lingua italiana 
+Possiamo fare un'analisi di frequenza su questo messaggio e confrontarla con la \textbf{tabella di frequenza} della lingua italiana.
+
 
 \[
 \begin{array}{c@{\hskip 1cm}c} % two columns with 1cm space between
@@ -237,46 +269,70 @@ Q & 0.45\%  \\
 \]
 
 
-Con questo capiamo che molto probabilmente una lettera tra \textbf{V}, \textbf{Z} oppure \textbf{R} nel testo cifrato corrisponderà alla \textbf{E} nel messaggio in chiaro. E Chiaramente questo ragionamento si può applicare a tutte le altre lettere, che con una buona probabilità assomiglierà ad una delle lettere con la percentuale simile.
+Con questo, capiamo che molto probabilmente una lettera tra \textbf{V}, \textbf{Z} oppure \textbf{R} nel testo cifrato corrisponderà alla \textbf{E} nel messaggio in chiaro.  
+Chiaramente, questo ragionamento si può applicare a tutte le altre lettere, le quali, con buona probabilità, corrisponderanno a una delle lettere con percentuali simili.
 
-\textbf{N.B.} usando l'alfabeto italiano le lettere straniere (\textbf{K}, \textbf{J}, \textbf{W}, \textbf{X} e \textbf{Y}) non sono presenti nella tabella di frequenza, ma con la cifratura che ho fatto io nel messaggio cifrato appaiono però mancheranno 5 lettere dell'alfabeto italiano perchè non hanno nessuna corrispondenza con le lettere straniere mancanti 
 
-\newpage
-In più si possono fare anche delle \textbf{osservazioni linguistiche}, per esempio in italiano solamente le lettere \textbf{A}, \textbf{E} e \textbf{O} possono stare da sole (per indicare le relative funzioni di preposizione), quindi nel messaggio cifrato possiamo sicuramente dire che le lettere \textbf{V} e \textbf{R} possono essere solamente \textbf{A}, \textbf{E} oppure \textbf{O}, che effettivamente combacia anche con le percentuali delle tabelle.
-Ad ogni modo, proviamo a sostituire nel messaggio cifrato le lettere con la percetuale più simile:
+\textbf{N.B.} Usando l'alfabeto italiano, le lettere straniere (\textbf{K}, \textbf{J}, \textbf{W}, \textbf{X} e \textbf{Y}) non sono presenti nella tabella di frequenza.  
+Nel messaggio cifrato che ho creato, queste lettere possono apparire, ma mancheranno 5 lettere dell'alfabeto italiano perché non hanno corrispondenza con le lettere straniere mancanti.
 
-\vspace{0.2cm}
-
-\textit{hder tivo ser ripo sa tovo, ufe gorpe i vezzopaotno, lti sde uilene non anlettolle sa vonla, ldllo i cena e i porba, i ceuonsi serro cmotpete e ser taenltite sa hderra, gaen, hdica i dn ltillo, i tacltanpetca, e i mtenset uotco e bapdti sa badve, lti dn mtovonlotao i seclti, e dn’ivmai uoclaeti sirr’irlti mitle; e ar monle, ufe aga uonpadnpe re sde tage, mit ufe tensi inuot mad cencaqare irr’ouufao hdecli lticbotvizaone, e cepna ar mdnlo an uda ar ripo uecci, e r’rssi tanuovanuai, met tamaprait moa nove sa ripo soge re tage, irronlininsoca sa ndogo, ricuain r’iuhdi saclensetca e tirrenlitca an ndoga porba e an ndoga cena.}
-\vspace{0.2cm}
-Ora come ora non sembra migliorato molto ma cominicamo a sistemare. Per esempio, come dicevamo prima le lettere singolo possono essere solamente \textbf{E}, \textbf{A} o \textbf{O}, ma ora abbiamo \textbf{I} e \textbf{E}, quindi dobbiamo cambiare la \textbf{I} e visto che è molto vicina di percentuale (nella tabella di frequenza) alla \text{A}, proviamo a invertire le due lettere. Così diventa
-
-\vspace{0.2cm}
-\textit{hder tavo ser rapo si tovo, ufe gorpe a vezzopiotno, lta sde ualene non inlettolle si vonli, ldllo a ceni e a porbi, a ceuonsa serro cmotpete e ser tienltate si hderri, gien, hdaci a dn ltallo, a ticltinpetci, e a mtenset uotco e bipdta si bidve, lta dn mtovonlotio a seclta, e dn’avmia uoclieta sarr’arlta matle; e ir monle, ufe igi uonpidnpe re sde tige, mat ufe tensa anuot mid cenciqire arr’ouufio hdecla ltacbotvazione, e cepni ir mdnlo in udi ir rapo uecca, e r’rssa tinuovinuia, met timipriat moi nove si rapo soge re tige, arronlanansoci si ndogo, racuian r’auhda siclensetci e tarrenlatci in ndogi porbi e in ndogi ceni.}
-
-\vspace{0.2cm}
-
-Ora possiamo notare che ci sono molti \textbf{SI}, che molto probabilemte possono essere \textbf{DI}, quindi proviamo a invertire \textbf{D} e \textbf{S}
-
-\vspace{0.2cm}
-\textit{hser tavo der rapo di tovo, ufe gorpe a vezzopiotno, lta dse ualene non inlettolle di vonli, lsllo a ceni e a porbi, a ceuonda derro cmotpete e der tienltate di hserri, gien, hsaci a sn ltallo, a ticltinpetci, e a mtendet uotco e bipsta di bisve, lta sn mtovonlotio a declta, e sn’avmia uoclieta darr’arlta matle; e ir monle, ufe igi uonpisnpe re dse tige, mat ufe tenda anuot mis cenciqire arr’ouufio hsecla ltacbotvazione, e cepni ir msnlo in usi ir rapo uecca, e r’rdda tinuovinuia, met timipriat moi nove di rapo doge re tige, arronlanandoci di nsogo, racuian r’auhsa diclendetci e tarrenlatci in nsogi porbi e in nsogi ceni.}
-\vspace{0.2cm}
-
-Ora siamo abbastanza sicuri che le lettere \textbf{D},\textbf{A},\textbf{I} e \textbf{E} siano al posto corretto. Possiamo continuare a fare delle anazilisi e man mano dedurre il testo originale. Per esempio nella prima riga c'è \textbf{DSE} e molto probabilmente potrebbe essere \textbf{DUE} (visto che la D ed E siamo sicuri che siano giuste). Oppure la parola \textbf{vezzopiotno} potrebbe essere \textbf{mezzogiorno} e così via.
-Se vuoi provare a risolvere te questo enigma da solo, sennò continua che ora c'è la soluzione.
 
 \newpage
-Ad ogni modo, con un pò di pazzienza potreste vedere che il testo cifrato qua sopra non è altro che i primi versi dei \textbf{Promessi Sposi}
+Inoltre, si possono fare delle \textbf{osservazioni linguistiche}.  
+Per esempio, in italiano solamente le lettere \textbf{A}, \textbf{E} e \textbf{O} possono stare da sole (per indicare le relative funzioni di preposizione).  
+Quindi, nel messaggio cifrato possiamo sicuramente dire che le lettere \textbf{V} e \textbf{R} possono corrispondere solamente a \textbf{A}, \textbf{E} oppure \textbf{O}, il che combacia anche con le percentuali delle tabelle.  
+Ad ogni modo, proviamo a sostituire nel messaggio cifrato le lettere con la \textbf{percentuale} più simile:
+
+\vspace{0.2cm}
+
+\textit{hder tivo ser ripo sa tovo, ufe gorpe i vezzopaotno, lti sde uilene non anlettolle
+sa vonla, ldllo i cena e i porba, i ceuonsi serro cmotpete e ser taenltite sa hderra,
+gaen, hdica i dn ltillo, i tacltanpetca, e i mtenset uotco e bapdti sa badve, lti dn
+mtovonlotao i seclti, e dn’ivmai uoclaeti sirr’irlti mitle; e ar monle, ufe aga uonpadnpe
+re sde tage, mit ufe tensi inuot mas cencaqare irr’ouufao hdecli lticbotvizaone, e cepna
+ar mdnlo an uda ar ripo uecci, e r’rssi tanuovanuai, met tamaprait moa nove sa ripo soge
+re tage, irronlininsoca sa ndogo, ricuain r’iuhdi saclensetca e tirrenlitca an ndoga
+porba e an ndoga cena.}
+\vspace{0.2cm}
+
+Ora, come ora, il testo non sembra molto chiaro, ma possiamo iniziare a sistemarlo.  
+Per esempio, come dicevamo prima, le lettere singole possono essere solamente \textbf{E}, \textbf{A} o \textbf{O}.  
+Attualmente, però, abbiamo \textbf{I} e \textbf{E}, quindi dobbiamo sostituire la \textbf{I}.  
+Poiché la \textbf{I} è molto vicina in percentuale (secondo la tabella di frequenza) alla \textbf{A}, proviamo a invertire le due lettere.  
+In questo modo, il testo diventa:
+
+\vspace{0.2cm}
+\textit{hder tavo ser rapo si tovo, ufe gorpe \textcolor{red}{a} vezzopiotno, lta sde ualene non inlettolle
+si vonli, ldllo \textcolor{red}{a} ceni e \textcolor{red}{a} porbi, \textcolor{red}{a} ceuonsa serro cmotpete e ser tienltate si hderri, [...]}
+\vspace{0.2cm}
+
+Ora possiamo notare che ci sono molti \textbf{SI}, che molto probabilmente possono essere \textbf{DI}.  
+Quindi, proviamo a invertire \textbf{D} e \textbf{S}.
+
+\vspace{0.2cm}
+\textit{hser tavo der rapo \textcolor{red}{d}i tovo, ufe gorpe a vezzopiotno, lta dse ualene non inlettolle
+\textcolor{red}{d}i vonli, lsllo a ceni e a porbi, a ceuonda derro cmotpete e der tienltate \textcolor{red}{d}i hserri, [...]}\vspace{0.2cm}
+
+Ora siamo abbastanza sicuri che le lettere \textbf{D}, \textbf{A}, \textbf{I} e \textbf{E} siano al posto corretto.  
+Possiamo continuare a fare delle analisi e, man mano, dedurre il testo originale.  
+Per esempio, nella prima riga c'è \textbf{DSE}, che molto probabilmente potrebbe essere \textbf{DUE} (visto che la \textbf{D} e la \textbf{E} siamo sicuri che siano corrette).  
+Oppure, la parola \textbf{vezzopiotno} potrebbe essere \textbf{mezzogiorno}, e così via.  
+Se vuoi, puoi provare a risolvere questo enigma da solo; altrimenti, continua che ora c'è la soluzione.
+
+\newpage
+Ad ogni modo, con un po' di pazienza potreste vedere che il testo cifrato qui sopra non è altro che i primi versi dei \textbf{Promessi Sposi}.
 
 \vspace{0.2cm}
 \textit{quel ramo del lago di como, che volge a mezzogiorno, tra due catene non interrotte di monti, tutto a seni e a golfi, a seconda dello sporgere e del rientrare di quelli, vien, quasi a un tratto, a ristringersi, e a prender corso e figura di fiume, tra un promontorio a destra, e un’ampia costiera dall’altra parte; e il ponte, che ivi congiunge le due rive, par che renda ancor piu sensibile all’occhio questa trasformazione, e segni il punto in cui il lago cessa, e l’adda rincomincia, per ripigliar poi nome di lago dove le rive, allontanandosi di nuovo, lascian l’acqua distendersi e rallentarsi in nuovi golfi e in nuovi seni. }
 \vspace{0.2cm}
 
 
-\textbf{N.B.} Per semplicità ho messo tutto in minuscolo e ho rimosso le lettere accentate, ma chiaramente se contemplate possono essere di aiuto per scoprire parole all'interno del testo.
+\textbf{N.B.} Per semplicità, ho messo tutto in minuscolo e ho rimosso le lettere accentate, ma chiaramente, se contemplate, possono essere d'aiuto per scoprire parole all'interno del testo.
+
 \vspace{0.2cm}
 
-Ora vediamo le corrispondenze quanto era giuste
+Ora vediamo quanto erano corrette le corrispondenze.
+
 
 \begin{figure}[h]
 
@@ -285,7 +341,7 @@ Ora vediamo le corrispondenze quanto era giuste
 
 \end{figure}
 
-Si può notare che nel complesso questa tecnica quasi tutte le lettere le aveva quasi indovinate, infatti molte lettere erano sbagliate di una casella.
+Si può notare che, nel complesso, questa tecnica ha indovinato quasi tutte le lettere; infatti, molte erano sbagliate di una sola posizione.
 
 \begin{itemize}
     \item Indovinate: 4/21 $\approx$ 19.0 \%
