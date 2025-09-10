@@ -2,7 +2,7 @@ import os
 import sys
 
 while True:
-    #try:
+    try:
         os.system("clear")
         print("----------------------------------------------------------")
         print("Ora dovrai inserire i parametri e il seme della sequenza")
@@ -34,5 +34,5 @@ while True:
             continue
         
         break
-    #except:
+    except:
         continue
