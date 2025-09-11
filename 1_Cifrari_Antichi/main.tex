@@ -12,35 +12,39 @@
 \usetikzlibrary{arrows.meta} % For nicer arrows
 
 
-\usepackage{hyperref} % for links
-
 \usepackage{xcolor}
 \usepackage{listings}
 
 
-\definecolor{maincolor}{HTML}{1E90FF}
-% Define colors for the code block
-\definecolor{commentgreen}{rgb}{0.13,0.55,0.13}
-\definecolor{stringblue}{rgb}{0.25,0.41,0.88}
-\definecolor{keywordblue}{rgb}{0.13,0.13,0.82}
-\definecolor{backgroundgray}{rgb}{1,1,1}
+\usepackage[colorlinks=true,
+            urlcolor=maincolor]{hyperref}
 
-% Configure the listings package
+
+\definecolor{maincolor}{HTML}{1E90FF}
+
+
+\definecolor{vscodeBlue}{RGB}{4,100,179}       % keywords
+\definecolor{vscodeRed}{RGB}{170,0,0}      % strings
+\definecolor{vscodeGreen}{RGB}{0,128,0}      % comments
+\definecolor{vscodeDarkYellow}{RGB}{242,134,29} % function names / identifiers
+\definecolor{vscodePurple}{RGB}{0,0,110}   % numbers
+
+% Setup listings for Python
 \lstset{
     language=Python,
-    backgroundcolor=\color{backgroundgray},
-    commentstyle=\color{commentgreen}\itshape,
-    stringstyle=\color{stringblue},
-    keywordstyle=\color{keywordblue}\bfseries,
+    keywordstyle=\color{vscodeBlue}\bfseries,
+    stringstyle=\color{vscodeRed},
+    commentstyle=\color{vscodeGreen}\itshape,
+    identifierstyle=\color{vscodeDarkYellow},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=5pt,
+    backgroundcolor=\color{white},  % white background
+    showstringspaces=false,
     basicstyle=\ttfamily\small,
     breaklines=true,
     frame=tb,
-    numbers=left,
-    numberstyle=\tiny\color{gray},
-    showstringspaces=false
 }
-
-
 
 
 \begin{document}
@@ -320,7 +324,7 @@ Per esempio, nella prima riga c'è \textbf{DSE}, che molto probabilmente potrebb
 Oppure, la parola \textbf{vezzopiotno} potrebbe essere \textbf{mezzogiorno}, e così via.  
 Se vuoi, puoi provare a risolvere questo enigma da solo, ho creato un codice Python: 
 
-link: \url{https://github.com/AlexBro98LoVero/Dispense/blob/main/Giochi/giocoParole.py}
+link: \url{https://github.com/AlexBro98LoVero/Dispense/blob/main/Giochi/1_1_giocoParole.py}
 
 altrimenti, continua che ora c'è la soluzione.
 
